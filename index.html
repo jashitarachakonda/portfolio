@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jashita Rachakonda - Frontend Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'dark-slate': '#1e293b',
+                        'slate-light': '#475569',
+                        'gradient-start': '#667eea',
+                        'gradient-end': '#764ba2',
+                        'accent-1': '#f093fb',
+                        'accent-2': '#764ba2',
+                    },
+                    animation: {
+                        'float-soft': 'float-soft 6s ease-in-out infinite',
+                        'glow-pulse': 'glow-pulse 2s ease-in-out infinite alternate',
+                        'shimmer-fast': 'shimmer-fast 2.5s ease-in-out infinite',
+                        'blob-move': 'blob-move 20s infinite',
+                        'fade-in-up-soft': 'fade-in-up-soft 1s ease-out',
+                    },
+                    keyframes: {
+                        'float-soft': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        'glow-pulse': {
+                            '0%, 100%': { boxShadow: '0 0 10px rgba(118, 75, 162, 0.4)' },
+                            '50%': { boxShadow: '0 0 25px rgba(118, 75, 162, 0.8)' },
+                        },
+                        'shimmer-fast': {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        },
+                        'blob-move': {
+                            '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+                            '25%': { transform: 'translate(-30px, -20px) scale(1.1)' },
+                            '50%': { transform: 'translate(20px, 30px) scale(0.95)' },
+                            '75%': { transform: 'translate(-10px, -10px) scale(1.05)' },
+                        },
+                        'fade-in-up-soft': {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #1a202c;
+            color: #e2e8f0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .elegant-gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #a855f7 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .glass-card {
+            background: rgba(45, 55, 72, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #a855f7);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hero-bg {
+            position: relative;
+            background: #1a202c;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            background: linear-gradient(135deg, #a855f7, #667eea);
+            opacity: 0.3;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: blob-move 20s infinite;
+        }
+
+        .blob-1 { top: -20%; left: -20%; width: 400px; height: 400px; animation-delay: -3s; }
+        .blob-2 { bottom: -20%; right: -20%; width: 500px; height: 500px; animation-delay: -8s; }
+    </style>
+</head>
+<body class="bg-[#1a202c] text-slate-200 overflow-x-hidden">
+    
+    <div id="scrollIndicator" class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-gradient-start via-accent-2 to-accent-1 z-50 transform scale-x-0 origin-left transition-transform duration-300"></div>
+
+    <div id="mobileMenu" class="fixed inset-0 z-50 bg-gray-900 bg-opacity-95 backdrop-blur-md transform translate-x-full transition-transform duration-500 ease-in-out md:hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <button class="absolute top-6 right-6 text-3xl text-gray-400 hover:text-white transition-colors" onclick="toggleMobileMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="#home" class="text-3xl font-semibold text-gray-200 hover:text-accent-1 transition-colors" onclick="toggleMobileMenu()">Home</a>
+            <a href="#about" class="text-3xl font-semibold text-gray-200 hover:text-accent-1 transition-colors" onclick="toggleMobileMenu()">About</a>
+            <a href="#skills" class="text-3xl font-semibold text-gray-200 hover:text-accent-1 transition-colors" onclick="toggleMobileMenu()">Skills</a>
+            <a href="#certificates" class="text-3xl font-semibold text-gray-200 hover:text-accent-1 transition-colors" onclick="toggleMobileMenu()">Certificates</a>
+            <a href="#projects" class="text-3xl font-semibold text-gray-200 hover:text-accent-1 transition-colors" onclick="toggleMobileMenu()">Projects</a>
+            <a href="#contact" class="text-3xl font-semibold text-gray-200 hover:text-accent-1 transition-colors" onclick="toggleMobileMenu()">Contact</a>
+        </div>
+    </div>
+
+    <nav class="sticky top-0 z-40 bg-dark-slate/50 backdrop-blur-md transition-all duration-300 border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="text-2xl font-bold elegant-gradient-text">Jashita</div>
+            <ul class="hidden md:flex space-x-10">
+                <li><a href="#home" class="nav-link font-medium text-slate-300 hover:text-white">Home</a></li>
+                <li><a href="#about" class="nav-link font-medium text-slate-300 hover:text-white">About</a></li>
+                <li><a href="#skills" class="nav-link font-medium text-slate-300 hover:text-white">Skills</a></li>
+                <li><a href="#certificates" class="nav-link font-medium text-slate-300 hover:text-white">Certificates</a></li>
+                <li><a href="#projects" class="nav-link font-medium text-slate-300 hover:text-white">Projects</a></li>
+                <li><a href="#contact" class="nav-link font-medium text-slate-300 hover:text-white">Contact</a></li>
+            </ul>
+            <button class="md:hidden text-2xl text-slate-300 hover:text-white transition-colors" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center relative py-20 md:py-0">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="text-center z-10 px-6 max-w-4xl mx-auto" data-aos="fade-in-up-soft" data-aos-duration="1200">
+            <h1 class="text-5xl sm:text-7xl lg:text-8xl font-bold leading-tight mb-6 font-playfair animate-fade-in-up">
+                Hi, I'm <span class="elegant-gradient-text">Jashita Rachakonda</span>
+            </h1>
+            <p class="text-xl sm:text-2xl lg:text-3xl font-light text-gray-400 mb-10 leading-relaxed animate-fade-in-up" data-aos-delay="200">
+                A passionate Frontend Developer crafting elegant and intuitive digital experiences.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up" data-aos-delay="400">
+                <a href="#projects" class="glass-card px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-colors duration-300">
+                    <i class="fas fa-arrow-right-long mr-3"></i>View My Work
+                </a>
+                <a href="#contact" class="border border-white/20 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-colors duration-300">
+                    <i class="fas fa-envelope mr-3"></i>Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 md:py-32 bg-dark-slate">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-bold elegant-gradient-text mb-4 font-playfair">About Me</h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-accent-1 to-accent-2 mx-auto mb-8"></div>
+                <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto font-poppins">
+                    I'm dedicated to creating seamless and beautiful user experiences with clean, efficient code.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6" data-aos="fade-right" data-aos-duration="1000">
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        I am a dedicated frontend developer with a passion for creating exceptional digital experiences. My journey in web development started with curiosity and has evolved into a career focused on crafting clean, efficient, and aesthetically beautiful interfaces.
+                    </p>
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        I believe in the power of thoughtful design and elegant code to solve real-world problems. Every project is an opportunity to learn, grow, and create something meaningful that makes a positive impact on users' lives.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <div class="glass-card px-6 py-3 rounded-full flex items-center space-x-3 hover:scale-105 transition-transform duration-300">
+                            <i class="fas fa-code text-gradient-start"></i>
+                            <span class="text-slate-200">Clean Code</span>
+                        </div>
+                        <div class="glass-card px-6 py-3 rounded-full flex items-center space-x-3 hover:scale-105 transition-transform duration-300">
+                            <i class="fas fa-users text-accent-1"></i>
+                            <span class="text-slate-200">User-Centric</span>
+                        </div>
+                        <div class="glass-card px-6 py-3 rounded-full flex items-center space-x-3 hover:scale-105 transition-transform duration-300">
+                            <i class="fas fa-rocket text-gradient-end"></i>
+                            <span class="text-slate-200">Performance</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left" data-aos-duration="1000">
+                    <div class="glass-card p-8 rounded-3xl">
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-gradient-start to-accent-2 rounded-full flex items-center justify-center text-white text-xl animate-float-soft">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-lg text-slate-200">Location</h4>
+                                    <p class="text-slate-400">Hyderabad, India</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-accent-1 to-gradient-end rounded-full flex items-center justify-center text-white text-xl animate-float-soft" style="animation-delay: -1s;">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-lg text-slate-200">Expertise</h4>
+                                    <p class="text-slate-400">Frontend Development</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-xl animate-float-soft" style="animation-delay: -2s;">
+                                    <i class="fas fa-coffee"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-lg text-slate-200">Fun Fact</h4>
+                                    <p class="text-slate-400">Lover of coffee and clean design</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-20 md:py-32 bg-dark-slate">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-bold elegant-gradient-text mb-4 font-playfair">Technical Skills</h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-accent-1 to-accent-2 mx-auto mb-8"></div>
+                <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto font-poppins">
+                    A comprehensive toolkit for building modern, scalable, and elegant web applications.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl elegant-gradient-text mb-4">
+                        <i class="fab fa-java"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Java</h3>
+                    <p class="text-slate-400">Backend development and robust application building.</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl elegant-gradient-text mb-4">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Python</h3>
+                    <p class="text-slate-400">Versatile for scripting, AI/ML, and web development.</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl elegant-gradient-text mb-4">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-white">HTML & CSS</h3>
+                    <p class="text-slate-400">Semantic markup and stylish, responsive designs.</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-4xl elegant-gradient-text mb-4">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-white">SQL</h3>
+                    <p class="text-slate-400">Efficient database management and data manipulation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates" class="py-20 md:py-32 bg-dark-slate">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-bold elegant-gradient-text mb-4 font-playfair">Certificates</h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-accent-1 to-accent-2 mx-auto mb-8"></div>
+                <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto font-poppins">
+                    A testament to my commitment to continuous learning and professional growth.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-slate-800/50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 animate-glow-pulse">
+                        <i class="fas fa-certificate text-3xl elegant-gradient-text"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Introduction to Data Science</h3>
+                    <p class="text-sm text-slate-400 mb-4">Issued by Cisco Networking Academy</p>
+                    <a href="#" class="inline-block px-4 py-2 text-sm font-semibold rounded-full bg-slate-700 hover:bg-slate-600 transition-colors">View Certificate</a>
+                    <a href="C:\Users\jashi\OneDrive\Pictures\Screenshots" target="_blank">
+  <img src="C:\Users\jashi\OneDrive\Pictures\Screenshots" alt="data science Certificate" style="width:200px;">
+</a>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-slate-800/50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 animate-glow-pulse">
+                        <i class="fas fa-certificate text-3xl elegant-gradient-text"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Python</h3>
+                    <p class="text-sm text-slate-400 mb-4">Issued by Infosys</p>
+                    <a href="#" class="inline-block px-4 py-2 text-sm font-semibold rounded-full bg-slate-700 hover:bg-slate-600 transition-colors">View Certificate</a>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-slate-800/50 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 animate-glow-pulse">
+                        <i class="fas fa-certificate text-3xl elegant-gradient-text"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Fontend with HTML5&CSS3</h3>
+                    <p class="text-sm text-slate-400 mb-4">Issued by TASK</p>
+                    <a href="#" class="inline-block px-4 py-2 text-sm font-semibold rounded-full bg-slate-700 hover:bg-slate-600 transition-colors">View Certificate</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 md:py-32 bg-dark-slate">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-5xl md:text-6xl font-bold elegant-gradient-text mb-4 font-playfair">Featured Projects</h2>
+            <div class="h-1 w-24 bg-gradient-to-r from-accent-1 to-accent-2 mx-auto mb-8"></div>
+            <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto font-poppins">
+                A showcase of my recent work, blending functionality with aesthetic appeal.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="glass-card p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="100">
+                <div class="mb-6 rounded-xl overflow-hidden aspect-video">
+                    <div class="flex items-center justify-center h-full bg-gradient-to-br from-blue-500 to-purple-600 text-white text-5xl">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                </div>
+                <h3 class="text-3xl font-bold text-white mb-2 font-playfair">Airline Reservation System</h3>
+                <p class="text-slate-400 mb-4 leading-relaxed">
+                    A comprehensive airline booking system with seat selection, flight scheduling, and passenger management.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="bg-slate-700 text-slate-300 px-3 py-1 text-sm rounded-full">Java</span>
+                    <span class="bg-slate-700 text-slate-300 px-3 py-1 text-sm rounded-full">SQL</span>
+                    <span class="bg-slate-700 text-slate-300 px-3 py-1 text-sm rounded-full">UI Design</span>
+                </div>
+                <a href="#" class="inline-block px-6 py-3 rounded-full font-semibold bg-white/10 hover:bg-white/20 transition-colors">
+                    View Project
+                </a>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="200">
+                <div class="mb-6 rounded-xl overflow-hidden aspect-video">
+                    <div class="flex items-center justify-center h-full bg-gradient-to-br from-green-500 to-teal-600 text-white text-5xl">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                </div>
+                <h3 class="text-3xl font-bold text-white mb-2 font-playfair">AI Plant Care</h3>
+                <p class="text-slate-400 mb-4 leading-relaxed">
+                    An intelligent plant care system using AI to monitor health and provide personalized care recommendations.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="bg-slate-700 text-slate-300 px-3 py-1 text-sm rounded-full">Node.js</span>
+                    <span class="bg-slate-700 text-slate-300 px-3 py-1 text-sm rounded-full">Html&Css</span>
+                    <span class="bg-slate-700 text-slate-300 px-3 py-1 text-sm rounded-full">Express.js</span>
+                </div>
+                <a href="#" class="inline-block px-6 py-3 rounded-full font-semibold bg-white/10 hover:bg-white/20 transition-colors">
+                    View Project
+                </a>
+            </div>
+            
+            <div class="glass-card p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="300">
+                <div class="mb-6 rounded-xl overflow-hidden aspect-video">
+                    <div class="flex items-center justify-center h-full bg-gradient-to-br from-pink-500 to-rose-600 text-white text-5xl">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                </div>
+                <h3 class="text-3xl font-bold text-white mb-2 font-playfair">Device for Obstacle Detection</h3>
+                <p class="text-slate-400 mb-4 leading-relaxed">
+                    An assistive technology device that uses sensors to help visually impaired individuals navigate safely by detecting obstacles.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="bg-slate-700 text-slate-300 px-3 py-1 text-sm rounded-full">Arduino</span>
+                    <span class="bg-slate-700 text-slate-300 px-3 py-1 text-sm rounded-full">Sensors</span>
+                    <span class="bg-slate-700 text-slate-300 px-3 py-1 text-sm rounded-full">Hardware</span>
+                </div>
+                <a href="#" class="inline-block px-6 py-3 rounded-full font-semibold bg-white/10 hover:bg-white/20 transition-colors">
+                    View Project
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+    <section id="contact" class="py-20 md:py-32 bg-dark-slate">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-bold elegant-gradient-text mb-4 font-playfair">Get In Touch</h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-accent-1 to-accent-2 mx-auto mb-8"></div>
+                <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto font-poppins">
+                    Ready to build something amazing? Let's connect and discuss your project.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <div class="glass-card p-8 rounded-3xl h-full flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold text-white mb-6 font-playfair">Contact Info</h3>
+                        <ul class="space-y-6 text-lg">
+                            <li class="flex items-center space-x-4">
+                                <div class="w-12 h-12 flex items-center justify-center bg-slate-700/50 rounded-full">
+                                    <i class="fas fa-envelope text-accent-1"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-200">Email</h4>
+                                    <a href="mailto:jashita@example.com" class="text-slate-400 hover:text-white transition-colors">jashita@example.com</a>
+                                </div>
+                            </li>
+                            <li class="flex items-center space-x-4">
+                                <div class="w-12 h-12 flex items-center justify-center bg-slate-700/50 rounded-full">
+                                    <i class="fas fa-phone-alt text-accent-1"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-200">Phone</h4>
+                                    <a href="tel:+911234567890" class="text-slate-400 hover:text-white transition-colors">+91 12345 67890</a>
+                                </div>
+                            </li>
+                            <li class="flex items-center space-x-4">
+                                <div class="w-12 h-12 flex items-center justify-center bg-slate-700/50 rounded-full">
+                                    <i class="fab fa-linkedin text-accent-1"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-200">LinkedIn</h4>
+                                    <a href="https://linkedin.com/in/jashitarachakonda" target="_blank" class="text-slate-400 hover:text-white transition-colors">/jashitarachakonda</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left" data-aos-duration="1000">
+                    <div class="glass-card p-8 rounded-3xl">
+                        <h3 class="text-3xl font-bold text-white mb-6 font-playfair">Send a Message</h3>
+                        <form action="#" method="post" class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-slate-400 mb-2">Name</label>
+                                <input type="text" id="name" name="name" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-slate-200 focus:outline-none focus:ring-2 focus:ring-accent-1" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-slate-400 mb-2">Email</label>
+                                <input type="email" id="email" name="email" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-slate-200 focus:outline-none focus:ring-2 focus:ring-accent-1" required>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-slate-400 mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-slate-200 focus:outline-none focus:ring-2 focus:ring-accent-1" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-gradient-to-r from-gradient-start to-accent-2 text-white font-semibold py-3 rounded-full hover:from-gradient-end hover:to-accent-1 transition-colors">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 py-10 text-center text-slate-400">
+        <div class="max-w-7xl mx-auto px-6">
+            <p>&copy; 2025 Jashita Rachakonda. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            once: true,
+            duration: 1200,
+            easing: 'ease-out-cubic',
+        });
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollY / totalHeight) * 100;
+            scrollIndicator.style.transform = `scaleX(${progress / 100})`;
+        });
+
+        const mobileMenu = document.getElementById('mobileMenu');
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('translate-x-full');
+        }
+    </script>
+</body>
+</html>
